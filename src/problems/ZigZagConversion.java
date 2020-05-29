@@ -6,6 +6,9 @@ import java.util.List;
 public class ZigZagConversion {
 
     public static String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
         List<StringBuilder> list = new ArrayList<>();
         StringBuilder string = new StringBuilder();
         StringBuilder returnString = new StringBuilder();
@@ -74,6 +77,12 @@ public class ZigZagConversion {
         6. Our condition in the for loop is if currentRow == 0, then going down is flipped.
         7. Before end of each iteration, if we are going down, then add 1 to currentRow, else add -1.
         8. Get StringBuilder from list at currentRow, add the character at position i of the StringBuilder of the given string.
+
+        Problems:
+
+        1. You forgot the edge case when numRows == 1, as the first iteration of the for loop over the given string will add 1,
+           then the next iteration will try to access non-existent StringBuilder at currentRow == 1 when there is only a StringBuilder
+           at currentRow == 0 in the list.
 
          */
 
