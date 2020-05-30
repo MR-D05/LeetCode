@@ -6,4 +6,5 @@ workflow "Merge branch if pull request is successful" {
 
 action "Auto-merge" {
   uses = "./auto_merge"
+  secrets = ["GITHUB_TOKEN"]
 }
