@@ -1,8 +1,7 @@
 package problems;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.Stack;
 
 /**
  * Definition for singly-linked list.
@@ -22,6 +21,127 @@ public class AddTwoNumbers {
             val = x;
         }
     }
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> firstStack = new Stack<>();
+        Stack<Integer> secondStack = new Stack<>();
+        StringBuilder firstString = new StringBuilder();
+        StringBuilder secondString = new StringBuilder();
+        BigInteger number;
+        String resultString;
+        ListNode finalListNode = new ListNode(0);
+        ListNode pointer = finalListNode;
+
+        while (l1 != null) {
+            firstStack.push(l1.val);
+            l1 = l1.next;
+        }
+
+        while (l2 != null) {
+            secondStack.push(l2.val);
+            l2 = l2.next;
+        }
+
+        while (!firstStack.isEmpty()) {
+            firstString.append(firstStack.pop().toString());
+        }
+
+        while (!secondStack.isEmpty()) {
+            secondString.append(secondStack.pop().toString());
+        }
+
+        BigInteger one = new BigInteger(firstString.toString());
+        BigInteger two = new BigInteger(secondString.toString());
+
+        number = one.add(two);
+
+        resultString = number.toString();
+
+        for (int i = resultString.length() - 1; i >= 0; i--) {
+            pointer.next = new ListNode(Integer.parseInt(String.valueOf(resultString.charAt(i))));
+            pointer = pointer.next;
+        }
+        return finalListNode.next;
+    }
+
+    public static void main(String[] args) {
+
+        /*
+        You are given two non-empty linked lists representing two non-negative integers.
+        The digits are stored in reverse order and each of their nodes contain a single digit.
+        Add the two numbers and return it as a linked list.
+
+        You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+        Example:
+
+        Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+        Output: 7 -> 0 -> 8
+        Explanation: 342 + 465 = 807.
+         */
+
+        /*
+        Plan:
+        1. While each node does not equal null, add to a stack.
+        2. While each stack does not equal null, add to string.
+        3. Add strings as integers together.
+        4. Cast to string again.
+        5. Make a new node with value 0.
+        6. Create a new node that points to node above.
+        7. For each char in string, node.next = new node of its integer value.
+        8. Set node = node.next.
+        9. Return original node.next.
+
+        Problems:
+        1. Plan above did not reverse the final number value, so it created a listnode from first number to last instead of last to first.
+           The solution was in the for loop to start from last character and descend instead of 0 to last.
+        2. Original solution does not consider large numbers; therefore, this solution needs to use BigInteger.
+         */
+
+        ListNode one = new ListNode(1);
+        ListNode nine1 = new ListNode(9);
+        ListNode nine2 = new ListNode(9);
+        ListNode nine3 = new ListNode(9);
+        ListNode nine4 = new ListNode(9);
+        ListNode nine5 = new ListNode(9);
+        ListNode nine6 = new ListNode(9);
+        ListNode nine7 = new ListNode(9);
+        ListNode nine8 = new ListNode(9);
+        ListNode nine9 = new ListNode(9);
+
+        ListNode nine10 = new ListNode(9);
+
+
+//        ListNode three = new ListNode(3);
+//        ListNode four = new ListNode(4);
+//        ListNode two = new ListNode(2);
+//
+//        ListNode five = new ListNode(5);
+//        ListNode six = new ListNode(6);
+//        ListNode four2 = new ListNode(4);
+
+//        two.next = four;
+//        four.next = three;
+//
+//        five.next = six;
+//        six.next = four2;
+
+        one.next = nine1;
+        nine1.next = nine2;
+        nine2.next = nine3;
+        nine3.next = nine4;
+        nine4.next = nine5;
+        nine5.next = nine6;
+        nine6.next = nine7;
+        nine7.next = nine8;
+        nine8.next = nine9;
+
+        System.out.println(addTwoNumbers(nine10, one));
+    }
+}
+
+/*
+Answer:
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         StringBuilder number1 = new StringBuilder("");
@@ -113,31 +233,4 @@ public class AddTwoNumbers {
 
         return listOfListNodes.get(0);
     }
-
-    public static void main(String[] args) {
-        ListNode nine = new ListNode(2);
-        ListNode nine1 = new ListNode(9);
-        ListNode nine2 = new ListNode(9);
-        ListNode nine3 = new ListNode(9);
-        ListNode nine4 = new ListNode(9);
-        ListNode nine5 = new ListNode(9);
-        ListNode nine6 = new ListNode(9);
-        ListNode nine7 = new ListNode(9);
-        ListNode three = new ListNode(3);
-
-        ListNode four = new ListNode(5);
-        ListNode five = new ListNode(6);
-        ListNode six = new ListNode(4);
-//
-//        two.next = four1;
-//        four1.next = three;
-//
-//        four.next = five;
-//        five.next = six;
-
-        ListNode one = new ListNode(0);
-        ListNode two = new ListNode(1);
-
-        System.out.println(addTwoNumbers(one, two));
-    }
-}
+ */
