@@ -82,39 +82,13 @@ public class RemoveNthNodeFromEndOfList {
         4. The last one we return in the end, we return lastDummy's next, which points to the head of firstDummy, which gives us the ability to
            traverse firstDummy, updating its state.
          */
-//
-//        ListNode one = new ListNode(9);
-//        ListNode two = new ListNode(0);
-//        ListNode three = new ListNode(3);
-//        ListNode one1 = new ListNode(8);
-//        ListNode two2 = new ListNode(7);
-//        ListNode three3 = new ListNode(3);
-//        ListNode one4 = new ListNode(8);
-//        ListNode two5 = new ListNode(6);
-//        ListNode three6 = new ListNode(3);
-//        ListNode four = new ListNode(1);
-//
-//        one.next = two;
-//        two.next = three;
-//        three.next = one1;
-//        one1.next = two2;
-//        two2.next = three3;
-//        three3.next = one4;
-//        one4.next = two5;
-//        two5.next = three6;
-//        three6.next = four;
 
+        //This is a test
 
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(2);
-//        ListNode three = new ListNode(3);
-//        ListNode four = new ListNode(4);
-//        ListNode five = new ListNode(5);
 
         one.next = two;
-//        two.next = three;
-//        three.next = four;
-//        four.next = five;
 
         System.out.println(removeNthFromEnd(one, 1));
     }
