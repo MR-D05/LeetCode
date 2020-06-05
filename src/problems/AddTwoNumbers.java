@@ -66,6 +66,8 @@ public class AddTwoNumbers {
 
     public static void main(String[] args) {
 
+        //This is a test
+
         /*
         You are given two non-empty linked lists representing two non-negative integers.
         The digits are stored in reverse order and each of their nodes contain a single digit.
@@ -110,21 +112,6 @@ public class AddTwoNumbers {
         ListNode nine9 = new ListNode(9);
 
         ListNode nine10 = new ListNode(9);
-
-
-//        ListNode three = new ListNode(3);
-//        ListNode four = new ListNode(4);
-//        ListNode two = new ListNode(2);
-//
-//        ListNode five = new ListNode(5);
-//        ListNode six = new ListNode(6);
-//        ListNode four2 = new ListNode(4);
-
-//        two.next = four;
-//        four.next = three;
-//
-//        five.next = six;
-//        six.next = four2;
 
         one.next = nine1;
         nine1.next = nine2;
