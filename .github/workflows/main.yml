@@ -6,7 +6,8 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+      - 'release/**'
+      - 'hotfix/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,6 +18,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
+    - name: Extract branch name
+      shell: bash
+      run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+    
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
@@ -25,5 +31,5 @@ jobs:
       run: git fetch && git checkout develop
 
     # Runs a set of commands using the runners shell
-    - name: Merge master into develop
-      run: git merge origin/master && git push origin develop
+    - name: Merge branch into develop
+      run: git merge "${BRANCH_NAME}" && git push origin develop
