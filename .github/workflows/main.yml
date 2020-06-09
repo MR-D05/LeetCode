@@ -22,7 +22,9 @@ jobs:
 
     - name: Extract branch name
       shell: bash
-      run: echo "::set-env name=BRANCH_NAME::$(echo env.GITHUB_REF)"
+      run: |
+        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
@@ -33,4 +35,4 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Merge branch into develop
-      run: git merge origin/"${BRANCH_NAME}" && git push origin develop
+      run: git merge ${{ steps.vars.outputs.branch }}" && git push origin develop
