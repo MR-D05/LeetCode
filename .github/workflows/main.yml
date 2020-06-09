@@ -23,9 +23,7 @@ jobs:
     - name: Extract branch name
       id: vars
       shell: bash
-      run: |
-        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
     
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
