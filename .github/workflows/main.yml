@@ -20,28 +20,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
           
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    
     - name: Extract branch name
       id: vars
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
     
-    # Runs a single command using the runners shell
-    - name: Checkout current branch
-      run: git fetch && git checkout ${{ steps.vars.outputs.branch }}
-    
-    - name: Log
-      run: git log
-
     # Runs a single command using the runners shell
     - name: Checkout develop branch
       run: git fetch && git checkout develop
     
-    - name: Log
-      run: git log
-
     # Runs a set of commands using the runners shell
     - name: Merge branch into develop
       run: git merge ${{ steps.vars.outputs.branch }} && git push origin develop
