@@ -23,13 +23,17 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - name: Log
-      run: git log
-
     - name: Extract branch name
       id: vars
       shell: bash
-      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF})"
+    
+    # Runs a single command using the runners shell
+    - name: Checkout current branch
+      run: git fetch && git checkout ${{ steps.vars.outputs.branch }}
+    
+    - name: Log
+      run: git log
 
     # Runs a single command using the runners shell
     - name: Checkout develop branch
