@@ -1,5 +1,3 @@
-//TEST
-
 package problems;
 
 import java.math.BigInteger;
