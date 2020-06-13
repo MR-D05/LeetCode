@@ -17,6 +17,9 @@ public class SwapNodesInPairs {
     }
 
     public static ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
         ListNode currentStart = head;
         ListNode returnPointer = currentStart.next;
         while (true) {
