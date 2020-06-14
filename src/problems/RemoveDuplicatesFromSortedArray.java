@@ -3,22 +3,14 @@ package problems;
 public class RemoveDuplicatesFromSortedArray {
 
     public int removeDuplicates(int[] nums) {
-
-        int length = 1;
-        int value = nums[nums.length-1];
-        int temp = Integer.MIN_VALUE;
-
-        for (int i = nums.length-1; i>0; i--) {
-            if (nums[i] == value) {
-                continue;
-            } else {
-                temp = nums[i];
-                nums[i] = value;
-                value = temp;
-                length++;
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[i] != nums[j]) {
+                i++;
+                nums[i] = nums[j];
             }
         }
-        return length;
+        return i + 1;
     }
 
     public static void main(String[] args) {
@@ -73,10 +65,22 @@ public class RemoveDuplicatesFromSortedArray {
            value value, then we update value to temp.
          */
 
+        /*
+        Problems:
+
+        1. Our plan was utterly wrong.
+        2. The answer is 2 pointers.
+        3. Our i int variable stays put and increments when our looping j int variable gets to a point where nums[j] does
+           not equal nums[i].
+        4. At this point we increment i in the array and copy the value of nums[j] to it.
+        5. Since we are dealing with arrays, we return the value of i + 1;
+         */
+
         RemoveDuplicatesFromSortedArray removeDuplicatesFromSortedArray = new RemoveDuplicatesFromSortedArray();
         //[0,0,1,1,1,2,2,3,3,4]
-        int[] nums = {1, 1, 2};
+        //int[] nums = {1, 1, 2};
         //int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
 
         System.out.println(removeDuplicatesFromSortedArray.removeDuplicates(nums));
     }
@@ -84,5 +88,14 @@ public class RemoveDuplicatesFromSortedArray {
 
 /*
 Answer:
-
+    public int removeDuplicates(int[] nums) {
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[i] != nums[j]) {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1;
+    }
  */
