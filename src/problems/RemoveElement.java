@@ -74,9 +74,21 @@ public class RemoveElement {
         RemoveElement removeElement = new RemoveElement();
         int[] nums = {3,2,2,3};
         //int[] nums = {0,1,2,2,3,0,4,2}; 2
-
         System.out.println(removeElement.removeElement(nums, 3));
-
-
     }
 }
+
+/*
+Answer:
+
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != val) {
+                nums[i] = nums[j];
+                i++;
+            }
+        }
+        return i;
+    }
+ */
