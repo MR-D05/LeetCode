@@ -46,8 +46,27 @@ public class SearchInsertPosition {
         1. Loop over array with two conditions: if nums[i] >= target, return i, else, return i+1.
          */
 
+        /*
+        Problems:
+
+        1. Needed to return nums.length, not nums.length+1, as it would be the next position in the array.
+         */
+
         SearchInsertPosition searchInsertPosition = new SearchInsertPosition();
         int[] nums = {1, 3, 5, 6};
         System.out.println(searchInsertPosition.searchInsert(nums, 0));
     }
 }
+
+/*
+Answer:
+
+    public int searchInsert(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] >= target) {
+                return i;
+            }
+        }
+        return nums.length;
+    }
+ */
