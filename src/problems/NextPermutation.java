@@ -89,4 +89,45 @@ public class NextPermutation {
 /*
 Answer:
 
+    public void nextPermutation(int[] nums) {
+        for (int i = nums.length - 1; i > 0; i--) {
+            if (nums[i] > nums[i - 1]) {
+                int store = nums[i - 1];
+                for (int j = i; j < nums.length; j++) {
+                    while (nums[j] > nums[i - 1]) {
+                        if (j + 1 < nums.length) {
+                            if (nums[j + 1] > nums[i - 1] && nums[j + 1] <= nums[j]) {
+                                j = j + 1;
+                            } else {
+                                nums[i - 1] = nums[j];
+                                nums[j] = store;
+                                sortAscending(nums, i);
+                                return;
+                            }
+                        } else {
+                            nums[i - 1] = nums[j];
+                            nums[j] = store;
+                            sortAscending(nums, i);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        sortAscending(nums, 0);
+    }
+
+    public void sortAscending(int[] nums, int left) {
+        for (int i = left; i < nums.length; i++) {
+            for (int j = left; j < nums.length; j++) {
+                if (j + 1 < nums.length) {
+                    if (nums[j] > nums[j + 1]) {
+                        int temp = nums[j];
+                        nums[j] = nums[j + 1];
+                        nums[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
  */
