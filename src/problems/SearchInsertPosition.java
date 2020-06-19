@@ -8,7 +8,7 @@ public class SearchInsertPosition {
                 return i;
             }
         }
-        return nums.length - 1;
+        return nums.length;
     }
 
     public static void main(String[] args) {
