@@ -3,11 +3,14 @@ package problems;
 public class CountAndSay {
 
     public String countAndSay(int n) {
+        if (n == 1) {
+            return "1";
+        }
         return recur(n, "1");
     }
 
     public String recur(int n, String string) {
-        if (n == 0) {
+        if (n == 1) {
             return string;
         } else {
             StringBuilder stringBuilder = new StringBuilder(string);
