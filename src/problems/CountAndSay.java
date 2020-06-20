@@ -25,7 +25,7 @@ public class CountAndSay {
                 } else {
                     nextString.append(counter);
                     nextString.append(stringBuilder.charAt(i));
-                    recur(n - 1, nextString.toString());
+                    return recur(n - 1, nextString.toString());
                 }
             }
         }
