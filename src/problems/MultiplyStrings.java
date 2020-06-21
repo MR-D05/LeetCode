@@ -19,7 +19,7 @@ public class MultiplyStrings {
             for (int j = smaller.length - 1; j >= 0; j--) {
                 sum = (larger[i] - '0') * (smaller[j] - '0') + carry;
                 carry = 0;
-                if (sum > 10) {
+                if (sum > 10 && smaller.length > 1 && larger.length > 1) {
                     carry = sum / 10;
                     levelSum += (sum - 10) * levelSumPower;
                 } else {
@@ -103,6 +103,6 @@ public class MultiplyStrings {
          */
 
         MultiplyStrings multiplyStrings = new MultiplyStrings();
-        System.out.println(multiplyStrings.multiply("12", "12"));
+        System.out.println(multiplyStrings.multiply("9", "9"));
     }
 }
