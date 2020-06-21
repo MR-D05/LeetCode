@@ -18,11 +18,11 @@ public class MultiplyStrings {
         if (chars1.length > chars2.length) {
             larger = chars1;
             smaller = chars2;
-        } else if(chars2.length > chars1.length) {
+        } else if (chars2.length > chars1.length) {
             larger = chars2;
             smaller = chars1;
         } else {
-            larger =  getLargerNumber(chars1, chars2);
+            larger = getLargerNumber(chars1, chars2);
             smaller = getSmallerNumber(chars1, chars2);
         }
 
@@ -32,12 +32,16 @@ public class MultiplyStrings {
                 carry = 0;
                 if (sum > 10 && smaller.length > 1 && larger.length > 1) {
                     carry = sum / 10;
-                    levelSum += (sum - 10) * levelSumPower;
+                    levelSum += (sum - (carry * 10)) * levelSumPower;
                 } else {
                     levelSum += sum * levelSumPower;
                 }
                 sum = 0;
                 levelSumPower *= 10;
+                if (j == 0) {
+                    levelSum += (carry * levelSumPower);
+                    carry = 0;
+                }
             }
             levelSum *= sumPower;
             result += levelSum;
@@ -114,6 +118,6 @@ public class MultiplyStrings {
          */
 
         MultiplyStrings multiplyStrings = new MultiplyStrings();
-        System.out.println(multiplyStrings.multiply("9", "99"));
+        System.out.println(multiplyStrings.multiply("999", "999"));
     }
 }
