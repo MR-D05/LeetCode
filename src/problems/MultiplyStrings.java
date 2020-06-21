@@ -6,14 +6,25 @@ public class MultiplyStrings {
 
         char[] chars1 = num1.toCharArray();
         char[] chars2 = num2.toCharArray();
-        char[] larger = getLargerNumber(chars1, chars2);
-        char[] smaller = getSmallerNumber(chars1, chars2);
+        char[] larger;
+        char[] smaller;
         int result = 0;
         int carry = 0;
         int sum = 0;
         int levelSum = 0;
         int sumPower = 1;
         int levelSumPower = 1;
+
+        if (chars1.length > chars2.length) {
+            larger = chars1;
+            smaller = chars2;
+        } else if(chars2.length > chars1.length) {
+            larger = chars2;
+            smaller = chars1;
+        } else {
+            larger =  getLargerNumber(chars1, chars2);
+            smaller = getSmallerNumber(chars1, chars2);
+        }
 
         for (int i = larger.length - 1; i >= 0; i--) {
             for (int j = smaller.length - 1; j >= 0; j--) {
@@ -103,6 +114,6 @@ public class MultiplyStrings {
          */
 
         MultiplyStrings multiplyStrings = new MultiplyStrings();
-        System.out.println(multiplyStrings.multiply("9", "9"));
+        System.out.println(multiplyStrings.multiply("9", "99"));
     }
 }
