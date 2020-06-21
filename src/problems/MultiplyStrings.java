@@ -6,6 +6,8 @@ public class MultiplyStrings {
 
         char[] chars1 = num1.toCharArray();
         char[] chars2 = num2.toCharArray();
+        char[] larger = getLargerNumber(chars1, chars2);
+        char[] smaller = getSmallerNumber(chars1, chars2);
         int result = 0;
         int carry = 0;
         int sum = 0;
@@ -13,46 +15,49 @@ public class MultiplyStrings {
         int sumPower = 1;
         int levelSumPower = 1;
 
-        if (chars1.length > chars2.length) {
-            for (int i = chars1.length - 1; i > 0; i--) {
-                for (int j = chars2.length - 1; j > 0; j--) {
-                    sum = (chars1[i] - '0') * (chars2[j] - '0') + carry;
-                    carry = 0;
-                    if (sum > 10) {
-                        carry = sum / 10;
-                    }
+        for (int i = larger.length - 1; i >= 0; i--) {
+            for (int j = smaller.length - 1; j >= 0; j--) {
+                sum = (larger[i] - '0') * (smaller[j] - '0') + carry;
+                carry = 0;
+                if (sum > 10) {
+                    carry = sum / 10;
                     levelSum += (sum - 10) * levelSumPower;
-                    sum+=levelSum;
-                    levelSumPower *= 10;
+                } else {
+                    levelSum += sum * levelSumPower;
                 }
-                sum *= sumPower;
-                result += sum;
-                sumPower *= 10;
                 sum = 0;
-                levelSumPower = 1;
+                levelSumPower *= 10;
             }
-        } else {
-            for (int i = chars2.length - 1; i >= 0; i--) {
-                for (int j = chars1.length - 1; j >= 0; j--) {
-                    sum = (chars1[i] - '0') * (chars2[j] - '0') + carry;
-                    carry = 0;
-                    if (sum > 10) {
-                        carry = sum / 10;
-                        levelSum += (sum - 10) * levelSumPower;
-                    } else {
-                        levelSum += sum * levelSumPower;
-                    }
-                    sum=0;
-                    levelSumPower *= 10;
-                }
-                levelSum *= sumPower;
-                result += levelSum;
-                sumPower *= 10;
-                levelSum = 0;
-                levelSumPower = 1;
+            levelSum *= sumPower;
+            result += levelSum;
+            sumPower *= 10;
+            levelSum = 0;
+            levelSumPower = 1;
+        }
+
+        return String.valueOf(result);
+    }
+
+    public char[] getLargerNumber(char[] chars1, char[] chars2) {
+        for (int i = 0; i < chars1.length; i++) {
+            if (chars1[i] > chars2[i]) {
+                return chars1;
+            } else if (chars2[i] > chars1[i]) {
+                return chars2;
             }
         }
-        return String.valueOf(result);
+        return chars1;
+    }
+
+    public char[] getSmallerNumber(char[] chars1, char[] chars2) {
+        for (int i = 0; i < chars1.length; i++) {
+            if (chars1[i] > chars2[i]) {
+                return chars2;
+            } else if (chars2[i] > chars1[i]) {
+                return chars1;
+            }
+        }
+        return chars1;
     }
 
     public static void main(String[] args) {
@@ -90,6 +95,11 @@ public class MultiplyStrings {
         8. We have an int result variable, which is the sum in each level, and a sum int variable that keeps track of our
            sum.
         9. So, we multiply our result by our level, add our result to our sum, zero out our result, and continue.
+
+
+
+        "123"
+        "456"
          */
 
         MultiplyStrings multiplyStrings = new MultiplyStrings();
