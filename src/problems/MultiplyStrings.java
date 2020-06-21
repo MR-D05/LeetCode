@@ -4,75 +4,37 @@ public class MultiplyStrings {
 
     public String multiply(String num1, String num2) {
 
-        char[] chars1 = num1.toCharArray();
-        char[] chars2 = num2.toCharArray();
-        char[] larger;
-        char[] smaller;
-        int result = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        int[] answer = new int[num1.length() + num2.length()];
         int carry = 0;
-        int sum = 0;
-        int levelSum = 0;
-        int sumPower = 1;
-        int levelSumPower = 1;
+        int pos = 0;
 
-        if (chars1.length > chars2.length) {
-            larger = chars1;
-            smaller = chars2;
-        } else if (chars2.length > chars1.length) {
-            larger = chars2;
-            smaller = chars1;
-        } else {
-            larger = getLargerNumber(chars1, chars2);
-            smaller = getSmallerNumber(chars1, chars2);
-        }
-
-        for (int i = larger.length - 1; i >= 0; i--) {
-            for (int j = smaller.length - 1; j >= 0; j--) {
-                sum = (larger[i] - '0') * (smaller[j] - '0') + carry;
-                carry = 0;
-                if (sum > 10 && smaller.length > 1 && larger.length > 1) {
-                    carry = sum / 10;
-                    levelSum += (sum - (carry * 10)) * levelSumPower;
-                } else {
-                    levelSum += sum * levelSumPower;
-                }
-                sum = 0;
-                levelSumPower *= 10;
-                if (j == 0) {
-                    levelSum += (carry * levelSumPower);
-                    carry = 0;
-                }
-            }
-            levelSum *= sumPower;
-            result += levelSum;
-            sumPower *= 10;
-            levelSum = 0;
-            levelSumPower = 1;
-        }
-
-        return String.valueOf(result);
-    }
-
-    public char[] getLargerNumber(char[] chars1, char[] chars2) {
-        for (int i = 0; i < chars1.length; i++) {
-            if (chars1[i] > chars2[i]) {
-                return chars1;
-            } else if (chars2[i] > chars1[i]) {
-                return chars2;
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            for (int j = num2.length() - 1; j >= 0; j--) {
+                int mul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                answer[i + j + 1] += mul;
             }
         }
-        return chars1;
-    }
 
-    public char[] getSmallerNumber(char[] chars1, char[] chars2) {
-        for (int i = 0; i < chars1.length; i++) {
-            if (chars1[i] > chars2[i]) {
-                return chars2;
-            } else if (chars2[i] > chars1[i]) {
-                return chars1;
+        for (int i = answer.length - 1; i >= 0; i--) {
+            answer[i] += carry;
+            carry = answer[i] / 10;
+            answer[i] = answer[i] % 10;
+        }
+
+        for (int value : answer) {
+            if (value == 0) {
+                pos+=1;
+            } else {
+                break;
             }
         }
-        return chars1;
+
+        for (int i = pos; i<answer.length; i++) {
+            stringBuilder.append(answer[i]);
+        }
+
+        return stringBuilder.toString();
     }
 
     public static void main(String[] args) {
@@ -110,14 +72,24 @@ public class MultiplyStrings {
         8. We have an int result variable, which is the sum in each level, and a sum int variable that keeps track of our
            sum.
         9. So, we multiply our result by our level, add our result to our sum, zero out our result, and continue.
+         */
 
+        /*
+        Problems:
 
-
-        "123"
-        "456"
+        1. The above approach was a complete and utter failure.
+        2. The answer becomes, we create an integer array that holds the product of the integers located at positions equal
+           to i and j in the 2 for loops.
+        3. The loops start from the last position until >= to zero.
+        4. We update the int[] at position i + j + 1 to be += to the product.
+        5. Now we loop over this int[] array and update each position starting from the last position to be % 10, but first we
+           add an int carry variable, then we update the carry variable to be what's in that bucket / 10, then we update that
+           element to be its contents % 10.
+        6. We then have a position int variable and loop over the int[] again updating position if there are leading zeros.
+        7. Finally, we loop over the int[] again starting at position, and append values to a StringBuilder and then return it to string.
          */
 
         MultiplyStrings multiplyStrings = new MultiplyStrings();
-        System.out.println(multiplyStrings.multiply("999", "999"));
+        System.out.println(multiplyStrings.multiply("2", "3"));
     }
 }
