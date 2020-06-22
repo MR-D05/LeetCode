@@ -93,3 +93,42 @@ public class MultiplyStrings {
         System.out.println(multiplyStrings.multiply("2", "3"));
     }
 }
+
+/*
+Answer:
+
+    public String multiply(String num1, String num2) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        int[] answer = new int[num1.length() + num2.length()];
+        int carry = 0;
+        int pos = 0;
+
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            for (int j = num2.length() - 1; j >= 0; j--) {
+                int mul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                answer[i + j + 1] += mul;
+            }
+        }
+
+        for (int i = answer.length - 1; i >= 0; i--) {
+            answer[i] += carry;
+            carry = answer[i] / 10;
+            answer[i] = answer[i] % 10;
+        }
+
+        for (int value : answer) {
+            if (value == 0) {
+                pos+=1;
+            } else {
+                break;
+            }
+        }
+
+        for (int i = pos; i<answer.length; i++) {
+            stringBuilder.append(answer[i]);
+        }
+
+        return stringBuilder.toString();
+    }
+ */
