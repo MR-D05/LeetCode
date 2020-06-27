@@ -17,9 +17,9 @@ public class Pow {
         }
 
         if (n % 2 == 1) {
-            return myPow(x * (x * x), (n - 1) / 2);
+            return x * myPow(x * x, (n - 1) / 2);
         } else {
-            return myPow((x * x), n / 2);
+            return x * myPow(x, n / 2);
         }
 
     }
