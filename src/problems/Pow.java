@@ -12,15 +12,17 @@ public class Pow {
             return x;
         }
 
-        if (n < 0) {
-            return myPow(1 / x, -n);
+        if (n == Integer.MIN_VALUE) {
+            x *= x;
+            n /= 2;
         }
 
-        if (n % 2 == 1) {
-            return x * myPow(x * x, (n - 1) / 2);
-        } else {
-            return myPow(x * x, n / 2);
+        if (n < 0) {
+            x = 1 / x;
+            n = -n;
         }
+
+        return n % 2 == 1 ? x * myPow(x * x, (n - 1) / 2) : myPow(x * x, n / 2);
 
     }
 
@@ -62,7 +64,7 @@ public class Pow {
          */
 
         Pow pow = new Pow();
-        System.out.println(pow.myPow(2.00000, 10));
+        System.out.println(pow.myPow(1.00000, -2147483648));
     }
 }
 
@@ -70,4 +72,27 @@ public class Pow {
 Answer:
 
 
+    public double myPow(double x, int n) {
+
+        if (n == 0) {
+            return 1;
+        }
+
+        if (n == 1) {
+            return x;
+        }
+
+        if (n == Integer.MIN_VALUE) {
+            x *= x;
+            n /= 2;
+        }
+
+        if (n < 0) {
+            x = 1 / x;
+            n = -n;
+        }
+
+        return n % 2 == 1 ? x * myPow(x * x, (n - 1) / 2) : myPow(x * x, n / 2);
+
+    }
  */
