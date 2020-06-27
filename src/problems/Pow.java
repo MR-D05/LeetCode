@@ -19,7 +19,7 @@ public class Pow {
         if (n % 2 == 1) {
             return x * myPow(x * x, (n - 1) / 2);
         } else {
-            return x * myPow(x, n / 2);
+            return myPow(x * x, n / 2);
         }
 
     }
@@ -62,7 +62,7 @@ public class Pow {
          */
 
         Pow pow = new Pow();
-        System.out.println(pow.myPow(2.10000, 3));
+        System.out.println(pow.myPow(2.00000, 10));
     }
 }
 
