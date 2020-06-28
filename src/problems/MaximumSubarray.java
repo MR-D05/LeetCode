@@ -6,6 +6,9 @@ public class MaximumSubarray {
         if (nums.length == 0) {
             return 0;
         }
+        if (nums.length == 1) {
+            return nums[0];
+        }
         int total = nums[0];
         int returnValue = 0;
         for (int i = 1; i < nums.length; i++) {
