@@ -56,5 +56,22 @@ public class MaximumSubarray {
 /*
 Answer:
 
-
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int total = nums[0];
+        int returnValue = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            returnValue = Math.max(returnValue, total);
+            total += nums[i];
+            if (total > nums[i]) continue;
+            total = 0;
+            total += nums[i];
+        }
+        return Math.max(returnValue, total);
+    }
  */
