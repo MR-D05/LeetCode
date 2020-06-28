@@ -18,7 +18,7 @@ public class MaximumSubarray {
             total = 0;
             total += nums[i];
         }
-        return returnValue;
+        return Math.max(returnValue, total);
     }
 
     public static void main(String[] args) {
