@@ -10,7 +10,7 @@ public class MaximumSubarray {
             return nums[0];
         }
         int total = nums[0];
-        int returnValue = 0;
+        int returnValue = nums[0];
         for (int i = 1; i < nums.length; i++) {
             returnValue = Math.max(returnValue, total);
             total += nums[i];
