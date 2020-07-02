@@ -1,38 +1,40 @@
 package problems;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PermutationSequence {
-    List<String> stringList = new ArrayList<>();
 
     public String getPermutation(int n, int k) {
-        boolean[] visited = new boolean[n+1];
-        Arrays.fill(visited, false);
-        recur(n, k, visited, new StringBuilder());
-        return stringList.get(stringList.size()-1);
+        List<Integer> digits = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            digits.add(i);
+        }
+        return recur(n, k, digits, new StringBuilder());
     }
 
-    public void recur(int n, int k, boolean[] visited, StringBuilder currentString) {
-        if (!stringList.contains(currentString.toString()) && stringList.size() == k && currentString.toString().length() == n) {
-            return;
+    public String recur(int n, int k, List<Integer> digits, StringBuilder returnString) {
+        if (n == 1) {
+            returnString.append(digits.get(n - 1));
+            return returnString.toString();
         }
+        int blockSize = factorial(n - 1);
+        int index = k / blockSize;
+        if (k % blockSize == 0) {
+            index -= 1;
+        }
+        returnString.append(digits.get(index));
+        digits.remove(index);
+        k -= (blockSize * index);
+        return recur(n - 1, k, digits, returnString);
+    }
 
-        if (!stringList.contains(currentString.toString()) && (currentString.toString().length() == n)) {
-            stringList.add(currentString.toString());
-            return;
+    public int factorial(int n) {
+        int total = n;
+        for (int i = n-1; i > 0; i--) {
+            total *= i;
         }
-
-        for (int i = 1; i <= n; i++) {
-            boolean[] tempVisited = visited.clone();
-            StringBuilder stringBuilder = new StringBuilder(currentString);
-            if (!tempVisited[i]) {
-                stringBuilder.append(i);
-                tempVisited[i] = true;
-                recur(n, k, tempVisited, stringBuilder);
-            }
-        }
+        return total;
     }
 
     public static void main(String[] args) {
@@ -108,7 +110,7 @@ public class PermutationSequence {
          */
 
         PermutationSequence permutationSequence = new PermutationSequence();
-        System.out.println(permutationSequence.getPermutation(3, 3));
+        System.out.println(permutationSequence.getPermutation(3, 1));
     }
 }
 
