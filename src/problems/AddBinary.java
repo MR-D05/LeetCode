@@ -29,7 +29,9 @@ public class AddBinary {
             carry = sum / 2;
             stringBuilder.append(sum % 2);
         }
-        stringBuilder.append(carry);
+        if (carry>0) {
+            stringBuilder.append(carry);
+        }
         return stringBuilder.reverse().toString();
     }
 
