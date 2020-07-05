@@ -3,6 +3,23 @@ package problems;
 public class AddBinary {
 
     public String addBinary(String a, String b) {
+
+        if (a.length() < b.length()) {
+            int padding = b.length()-a.length();
+            StringBuilder aBuilder = new StringBuilder(a);
+            for (int i = 0; i < padding; i++) {
+                aBuilder.insert(0, '0');
+            }
+            a = aBuilder.toString();
+        } else if (b.length() < a.length()) {
+            int padding = a.length()-b.length();
+            StringBuilder bBuilder = new StringBuilder(b);
+            for (int i = 0; i < padding; i++) {
+               bBuilder.insert(0, '0');
+            }
+            b = bBuilder.toString();
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         int carry = 0;
         for (int i = a.length() - 1; i >= 0; i--) {
