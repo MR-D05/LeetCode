@@ -12,12 +12,12 @@ public class LongestPalindromicSubstringTest {
         int end = 0;
 
         for (int i = 0; i < s.length() - 1; i++) {
-            int lengthOdd = expandFromCenter(s, i, i);
-            int lengthEven = expandFromCenter(s, i, i + 1);
-            int maxLength = Math.max(lengthOdd, lengthEven);
-            if (maxLength > end - start) {
-                start = i - (maxLength / 2) + 1;
-                end = i + (maxLength / 2);
+            int length1 = expandFromCenter(s, i, i);
+            int length2 = expandFromCenter(s, i, i + 1);
+            int length = Math.max(length1, length2);
+            if (length > end - start) {
+                start = i - (length - 1) / 2;
+                end = i + length / 2;
             }
         }
 
@@ -31,12 +31,11 @@ public class LongestPalindromicSubstringTest {
             left--;
             right++;
         }
-
         return right - left - 1;
     }
 
 
     public static void main(String[] args) {
-        System.out.println(getLongestPalindromicSubstring("abbbbbba"));
+        System.out.println(getLongestPalindromicSubstring("cbbd"));
     }
 }

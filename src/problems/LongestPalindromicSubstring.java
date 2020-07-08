@@ -55,7 +55,6 @@ public class LongestPalindromicSubstring {
            i - (length - 1) / 2 and the end will be i + length / 2. Why is it length - 1? I still do not get that intuitively,
            and that usually means it will stump me the next time I try to solve this.
 
-
         Problems:
         1. If division has a remainder, ints round DOWN.
         2. Substrings start where you intuitively think they start, and end + 1.
@@ -63,7 +62,7 @@ public class LongestPalindromicSubstring {
          */
 
 
-        System.out.println(longestPalindrome("cbb"));
+        System.out.println(longestPalindrome("babad"));
     }
 
 }
