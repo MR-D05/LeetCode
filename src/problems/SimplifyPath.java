@@ -8,7 +8,7 @@ public class SimplifyPath {
 
         Stack<String> stack = new Stack<>();
         StringBuilder finalPath = new StringBuilder();
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
 
         for (int i = path.length() - 1; i >= 0; i--) {
             if (i - 1 >= 0) {
@@ -20,16 +20,68 @@ public class SimplifyPath {
                 if (path.charAt(i) == '.' && path.charAt(i - 1) == '.') {
                     stack.push("..");
                     i -= 1;
+                    continue;
                 }
-            } else {
-                stack.push(String.valueOf(path.charAt(i)));
+            }
+            stack.push(String.valueOf(path.charAt(i)));
+        }
+
+        while (stack.iterator().hasNext()) {
+            String current = stack.pop();
+            if (current.equals("/") || current.equals("//")) {
+                if (finalPath.length() == 0) {
+                    finalPath.append("/");
+                    continue;
+                }
+                if (alphabet.contains(String.valueOf(finalPath.charAt(finalPath.length()-1)))) {
+                    finalPath.append("/");
+                    continue;
+                }
+            }
+            if (alphabet.contains(current)) {
+                finalPath.append(current);
+                continue;
+            }
+            if (current.equals(".")) {
+                if (!stack.empty()) {
+                    if (stack.peek().equals(".") || stack.peek().equals("..") || alphabet.contains(stack.peek())) {
+                        String next = stack.pop();
+                        finalPath.append(current);
+                        finalPath.append(next);
+                        continue;
+                    }
+                }
+            }
+            if (current.equals("..")) {
+                if (!stack.empty()) {
+                    if (stack.peek().equals(".") || stack.peek().equals("..") || alphabet.contains(stack.peek())) {
+                        String next = stack.pop();
+                        finalPath.append(current);
+                        finalPath.append(next);
+                        continue;
+                    }
+                }
+                if (finalPath.length() >= 3) {
+                    finalPath.deleteCharAt(finalPath.length() - 1);
+                    while (finalPath.charAt(finalPath.length() - 1) != '/') {
+                        finalPath.deleteCharAt(finalPath.length() - 1);
+                    }
+                    if (finalPath.length() != 1) {
+                        finalPath.deleteCharAt(finalPath.length() - 1);
+                    }
+                    continue;
+                }
+            }
+            if (current.equals("..")) {
+                finalPath = new StringBuilder("/");
             }
         }
 
-        System.out.println(stack);
+        if (finalPath.length() > 1 && Character.toString(finalPath.charAt(finalPath.length() - 1)).equals("/")) {
+            finalPath.deleteCharAt(finalPath.length() - 1);
+        }
 
         return finalPath.toString();
-
     }
 
     public static void main(String[] args) {
@@ -91,14 +143,94 @@ public class SimplifyPath {
            ahead past i+1.
         4. Same for //.
         5. We do this starting from the back.
+        "/a/./b///../c/../././../d/..//../e/./f/./g/././//.//h///././/..///"
          */
 
         SimplifyPath simplifyPath = new SimplifyPath();
-        System.out.println(simplifyPath.simplifyPath("/a/../../b/../c//.//"));
+        System.out.println(simplifyPath.simplifyPath("/a/./b/../../c/"));
     }
 }
 
 /*
 Answer:
 
+    public String simplifyPath(String path) {
+
+        Stack<String> stack = new Stack<>();
+        StringBuilder finalPath = new StringBuilder();
+        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789";
+
+        for (int i = path.length() - 1; i >= 0; i--) {
+            if (i - 1 >= 0) {
+                if (path.charAt(i) == '/' && path.charAt(i - 1) == '/') {
+                    stack.push("//");
+                    i -= 1;
+                    continue;
+                }
+                if (path.charAt(i) == '.' && path.charAt(i - 1) == '.') {
+                    stack.push("..");
+                    i -= 1;
+                    continue;
+                }
+            }
+            stack.push(String.valueOf(path.charAt(i)));
+        }
+
+        while (stack.iterator().hasNext()) {
+            String current = stack.pop();
+            if (current.equals("/") || current.equals("//")) {
+                if (finalPath.length() == 0) {
+                    finalPath.append("/");
+                    continue;
+                }
+                if (alphabet.contains(String.valueOf(finalPath.charAt(finalPath.length()-1)))) {
+                    finalPath.append("/");
+                    continue;
+                }
+            }
+            if (alphabet.contains(current)) {
+                finalPath.append(current);
+                continue;
+            }
+            if (current.equals(".")) {
+                if (!stack.empty()) {
+                    if (stack.peek().equals(".") || stack.peek().equals("..") || alphabet.contains(stack.peek())) {
+                        String next = stack.pop();
+                        finalPath.append(current);
+                        finalPath.append(next);
+                        continue;
+                    }
+                }
+            }
+            if (current.equals("..")) {
+                if (!stack.empty()) {
+                    if (stack.peek().equals(".") || stack.peek().equals("..") || alphabet.contains(stack.peek())) {
+                        String next = stack.pop();
+                        finalPath.append(current);
+                        finalPath.append(next);
+                        continue;
+                    }
+                }
+                if (finalPath.length() >= 3) {
+                    finalPath.deleteCharAt(finalPath.length() - 1);
+                    while (finalPath.charAt(finalPath.length() - 1) != '/') {
+                        finalPath.deleteCharAt(finalPath.length() - 1);
+                    }
+                    if (finalPath.length() != 1) {
+                        finalPath.deleteCharAt(finalPath.length() - 1);
+                    }
+                    continue;
+                }
+            }
+            if (current.equals("..")) {
+                finalPath = new StringBuilder("/");
+            }
+        }
+
+        if (finalPath.length() > 1 && Character.toString(finalPath.charAt(finalPath.length() - 1)).equals("/")) {
+            finalPath.deleteCharAt(finalPath.length() - 1);
+        }
+
+        return finalPath.toString();
+    }
  */
